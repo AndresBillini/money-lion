@@ -2,7 +2,7 @@ import { ContentCard, FeedContent } from "./interfaces";
 
 const mockApi = 'https://stoplight.io/mocks/engine/fullstack-spec/52502230/content';
 
-const getFeedContent = (): Promise<FeedContent[]|string> => {
+const getContentFeed = (): Promise<FeedContent[]|string> => {
     return new Promise<FeedContent[]|string>(async (resolve, reject) => {
         try {
             const fetchContent = await fetch(mockApi);
@@ -23,13 +23,13 @@ const getFeedContent = (): Promise<FeedContent[]|string> => {
     
             resolve(feedContent);
         } catch (_err) {
-            reject(`There was an error with the API`);
+            reject('There was an error with the API');
         }
     });
 };
 
 const services = {
-    getFeedContent
+    getContentFeed
 };
 
 export default services;
