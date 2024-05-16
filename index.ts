@@ -1,9 +1,12 @@
-import express, { Request, Response } from "express";
-import services from "./services";
+import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+import options from "./swagger";
+import router from "./routes";
 
-dotenv.config();
+dotenv.config({ override: true });
 
 const app = express();
 const port = process.env.PORT;
@@ -11,17 +14,10 @@ const backendUri = process.env.BACKEND_URI;
 
 app.use(cors());
 app.use(express.json());
+app.use('/api', router);
 
-app.get('/', (_req: Request, res: Response) => {
-    res.send('<h1 style="text-align: center;">Express + TypeScript Server for Money Lion Challenge</h1>')
-});
+const specs = swaggerJsdoc(options);
 
-app.get('/content-feed', (_req: Request, res: Response) => {
-    services.getContentFeed().then((value) => {
-        res.send(value);
-    }).catch((err) => {
-        res.status(500).send(err);
-    });
-});
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 
-app.listen(port, () => console.log(`Server is running at ${backendUri}:${port}`));
+app.listen(port, () => console.log(`Server is running at ${backendUri}:${port}/api`));
