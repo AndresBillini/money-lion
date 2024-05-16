@@ -16,6 +16,10 @@ app.use(cors());
 app.use(express.json());
 app.use('/api', router);
 
+app.get('/', (_req, res) => {
+    res.redirect('/api')
+});
+
 const specs = swaggerJsdoc(options);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
