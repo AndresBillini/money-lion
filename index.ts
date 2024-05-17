@@ -9,7 +9,6 @@ import router from "./routes";
 dotenv.config({ override: true });
 
 const app = express();
-const port = process.env.PORT;
 const backendUri = process.env.BACKEND_URI;
 
 app.use(cors());
@@ -24,4 +23,4 @@ const specs = swaggerJsdoc(options);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 
-app.listen(port, () => console.log(`Server is running at ${backendUri}:${port}/api`));
+app.listen(port, () => console.log(`Server is running at ${backendUri}/api`));
