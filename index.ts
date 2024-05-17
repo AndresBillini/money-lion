@@ -10,6 +10,7 @@ dotenv.config({ override: true });
 
 const app = express();
 const backendUri = process.env.BACKEND_URI;
+const port = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
