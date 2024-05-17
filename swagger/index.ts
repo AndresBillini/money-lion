@@ -11,7 +11,7 @@ const options = {
             description: 'Money Lion Content Feed System covered for Read operation using a Node.js API',
         },
         servers:[
-            {url:`${process.env.BACKEND_URI}:${process.env.PORT}/api`}, //you can change you server url
+            {url:`${process.env.BACKEND_URI}/api`}, //you can change you server url
         ],
     },
     apis: ['./routes/*.ts'], //you can change you swagger path
